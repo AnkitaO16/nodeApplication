@@ -23,6 +23,8 @@ verifyToken = (req, res, next) => {
   });
 };
 
+
+
 isAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
@@ -84,6 +86,6 @@ const authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
   isModerator: isModerator,
-  isModeratorOrAdmin: isModeratorOrAdmin
+  isModeratorOrAdmin: isModeratorOrAdmin,
 };
 module.exports = authJwt;
