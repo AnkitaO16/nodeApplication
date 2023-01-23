@@ -25,6 +25,15 @@ verifyToken = (req, res, next) => {
 
 
 
+generateToken = (req, res, next) =>{
+  const token = jwt.sign(req.body, config.secret);
+  req.body.token = token;
+  next(null, token);
+}
+
+
+
+
 isAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
@@ -87,5 +96,6 @@ const authJwt = {
   isAdmin: isAdmin,
   isModerator: isModerator,
   isModeratorOrAdmin: isModeratorOrAdmin,
+  generateToken: generateToken
 };
 module.exports = authJwt;

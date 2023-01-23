@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
   app.post("/api/test/create",controller.createUser);
 
-  app.post("/api/test/login", controller.loginUser);
+  app.post("/api/test/login",authJwt.generateToken ,controller.loginUser);
 
 
 

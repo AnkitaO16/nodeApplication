@@ -1,6 +1,7 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
+const { authJwt } = require("../middleware");
 
 
 
@@ -51,8 +52,6 @@ exports.allAccess = (req, res) => {
     db.sequelize
       .sync()
       .then(() => {
-      
-
       db.user.findOne({
       where : {
         email : req.body.email
@@ -61,10 +60,8 @@ exports.allAccess = (req, res) => {
   
 
       if(result.password == req.body.password){
-   
-      const token  =   jwt.sign(req.body,  config.secret)
-        res.send({
-          token: token,
+           res.send({
+          token: req.body.token,
           'data' : result
         });
       }

@@ -23,13 +23,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 
-
+app.get("/", (req, res)=> {
+  res.send("Hello from server data changed");
+})
 
 // simple route
 app.get("/data", (req, res) => {
   console.log(req.body);
   res.json({ message: "Welcome to my application.", data : req.body });
 });
+
 
 
 
@@ -40,12 +43,12 @@ app.listen(PORT, () => {
 });
 
 const db = require("./app/models");
-const Role = db.role;
+// const Role = db.role;
 
-db.sequelize.sync({ force: false }).then(() => {
-  console.log("Drop and Resync Db");
-  // initial();
-});
+// db.sequelize.sync({ force: false }).then(() => {
+//   console.log("Drop and Resync Db");
+//   // initial();
+// });
 
 function initial() {
   Role.create({
